@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "843984095691",
+    "project_id": "tractian-poc",
+    "storage_bucket": "tractian-poc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:843984095691:android:13ed52a3041f1e21c78e4e",
+        "android_client_info": {
+          "package_name": "com.example.app_tractian_poc"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGIYmhA1rV-T7hFVOsnVLAgPHl_F15DBs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

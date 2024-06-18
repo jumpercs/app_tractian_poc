@@ -35,7 +35,7 @@ class NotificationService {
     androidDetails = const AndroidNotificationDetails(
       'lembretes_notifications_details',
       'Lembretes',
-      channelDescription: 'Este canal é para lembretes!',
+      channelDescription: 'Notificações de lembretes',
       importance: Importance.max,
       priority: Priority.max,
       enableVibration: true,
@@ -73,7 +73,7 @@ class NotificationService {
 
   _onSelectNotification(String? payload) {
     if (payload != null && payload.isNotEmpty) {
-      print('Notification payload: $payload');
+      debugPrint('Notification payload: $payload');
     }
   }
 
@@ -90,7 +90,7 @@ class NotificationService {
         android: androidDetails,
       ),
       payload: notification.payload,
-      androidAllowWhileIdle: true,
+      androidScheduleMode: AndroidScheduleMode.exact,
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
     );

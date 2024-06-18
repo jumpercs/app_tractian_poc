@@ -1,11 +1,12 @@
+import 'package:app_tractian_poc/models/order_model.dart';
 import 'package:app_tractian_poc/pages/chart_page.dart';
-import 'package:app_tractian_poc/pages/order_page.dart';
+import 'package:app_tractian_poc/widgets/progress_grid.dart';
 import 'package:flutter/material.dart';
 
 class OrderDetailsPage extends StatefulWidget {
-  final OrderService orderService;
+  final Order orders;
 
-  const OrderDetailsPage({super.key, required this.orderService});
+  const OrderDetailsPage({super.key, required this.orders});
 
   @override
   State<OrderDetailsPage> createState() => _OrderDetailsPageState();
@@ -18,7 +19,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
       appBar: AppBar(
         centerTitle: true,
         elevation: 0,
-        title: Text(widget.orderService.id),
+        title: Text(widget.orders.id),
         actions: [
           IconButton(
             onPressed: () {},
@@ -52,22 +53,22 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
               ),
               children: [
                 ProgressGrid(
-                  isSelected: widget.orderService.status == 'Aberta',
+                  isSelected: widget.orders.status == 'Aberta',
                   label: 'Aberta',
                   icon: Icons.lock_open,
                 ),
                 ProgressGrid(
-                  isSelected: widget.orderService.status == 'Em espera',
+                  isSelected: widget.orders.status == 'Em espera',
                   label: 'Em espera',
                   icon: Icons.pause_circle_outline,
                 ),
                 ProgressGrid(
-                  isSelected: widget.orderService.status == 'Em progresso',
+                  isSelected: widget.orders.status == 'Em progresso',
                   label: 'Em progresso',
                   icon: Icons.handyman_outlined,
                 ),
                 ProgressGrid(
-                  isSelected: widget.orderService.status == 'Concluída',
+                  isSelected: widget.orders.status == 'Concluída',
                   label: 'Concluída',
                   icon: Icons.check,
                 ),
@@ -78,16 +79,16 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             Text(
-              widget.orderService.name,
-              style: TextStyle(fontSize: 16),
+              widget.orders.name,
+              style: const TextStyle(fontSize: 16),
             ),
             const SizedBox(height: 16),
             const Text("Data de Vencimento",
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             Text(
-              widget.orderService.dueDate,
-              style: TextStyle(fontSize: 16),
+              widget.orders.dueDate,
+              style: const TextStyle(fontSize: 16),
             ),
             const SizedBox(height: 16),
             const Text("Responsável",
@@ -97,36 +98,36 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
               children: [
                 CircleAvatar(
                   backgroundImage:
-                      NetworkImage(widget.orderService.responsibles[0].photo),
+                      NetworkImage(widget.orders.responsibles[0].photo),
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  widget.orderService.responsibles[0].name,
-                  style: TextStyle(fontSize: 16),
+                  widget.orders.responsibles[0].name,
+                  style: const TextStyle(fontSize: 16),
                 ),
               ],
             ),
             const SizedBox(height: 16),
             InkWell(
               onTap: () {},
-              child: ListTile(
-                title: const Text(
+              child: const ListTile(
+                title: Text(
                   "Adicionar outro responsável",
                   style: TextStyle(color: Colors.blue),
                 ),
-                leading: const Icon(
+                leading: Icon(
                   Icons.add,
                   color: Colors.blue,
                 ),
               ),
             ),
             const SizedBox(height: 8),
-            Divider(),
+            const Divider(),
             const SizedBox(height: 8),
             const Text("Ativo",
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
-            for (var asset in widget.orderService.assets)
+            for (var asset in widget.orders.assets)
               InkWell(
                 onTap: () {
                   navigateToMedicao();
@@ -134,7 +135,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                 child: ListTile(
                   title: Text(
                     asset,
-                    style: TextStyle(color: Colors.blue),
+                    style: const TextStyle(color: Colors.blue),
                   ),
                   leading: const Icon(
                     Icons.model_training_rounded,
@@ -151,54 +152,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
   navigateToMedicao() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => ChartPage()),
-    );
-  }
-}
-
-class ProgressGrid extends StatelessWidget {
-  const ProgressGrid({
-    super.key,
-    required this.label,
-    required this.icon,
-    required this.isSelected,
-  });
-
-  final String label;
-  final IconData icon;
-  final bool isSelected;
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      color: isSelected ? Colors.blue : Colors.white,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: isSelected
-            ? [
-                Icon(
-                  icon,
-                  color: Colors.white,
-                  size: 40,
-                ),
-                Text(
-                  label,
-                  style: const TextStyle(
-                    fontSize: 20,
-                    color: Colors.white,
-                  ),
-                ),
-              ]
-            : [
-                Icon(icon),
-                Text(
-                  label,
-                  style: const TextStyle(
-                    fontSize: 20,
-                  ),
-                ),
-              ],
-      ),
+      MaterialPageRoute(builder: (context) => const ChartPage()),
     );
   }
 }
